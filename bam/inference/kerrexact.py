@@ -23,7 +23,7 @@ minkmetric = np.diag([-1, 1, 1, 1])
 kernel = np.ones((3,3))
 
 phi_o = 3*np.pi/2
-# r_o = np.infty
+# r_o = np.inf
 
 def R1_R2(al,phi,j,ret_r2=True): #B62 and B65
     """
@@ -120,7 +120,7 @@ def getlorentzboost(boost, chi):
 #these should return r, phi, tau, tau_tot
 
 
-def ray_trace_by_case(a, rm, rp, sb, lam, eta, r1, r2, r3, r4, up, um, inc, nmax, case, adap_fac= 1,axisymmetric = True, stationary=True,nmin=0, r_o = np.infty):
+def ray_trace_by_case(a, rm, rp, sb, lam, eta, r1, r2, r3, r4, up, um, inc, nmax, case, adap_fac= 1,axisymmetric = True, stationary=True,nmin=0, r_o = np.inf):
     """
     Case 1: r1, r2, r3, r4 are real, r2<rp<r3.
     Case 2: r1, r2, r3, r4 are real and less than rp.
@@ -168,7 +168,7 @@ def ray_trace_by_case(a, rm, rp, sb, lam, eta, r1, r2, r3, r4, up, um, inc, nmax
     # sb = np.sign(beta)
     if case == 1:
         r3142sqrt = np.sqrt(r31*r42)
-        if r_o == np.infty:
+        if r_o == np.inf:
             x2ro = np.sqrt(r31/r41)
         else:
             x2ro = np.sqrt(r31*(r_o-r4)/(r41*(r_o-r3)))
@@ -182,7 +182,7 @@ def ray_trace_by_case(a, rm, rp, sb, lam, eta, r1, r2, r3, r4, up, um, inc, nmax
         # Ir_total = 2*Ir_turn
     if case == 2:
         r3142sqrt = np.sqrt(r31*r42)
-        if r_o == np.infty:
+        if r_o == np.inf:
             x2ro = np.sqrt(r31/r41)
         else:
             x2ro = np.sqrt(r31*(r_o-r4)/(r41*(r_o-r3)))
@@ -309,7 +309,7 @@ def ray_trace_by_case(a, rm, rp, sb, lam, eta, r1, r2, r3, r4, up, um, inc, nmax
         rp1 = rp-r1
         rp2 = rp-r2
         x3rp = (Agl*rp1 - Bgl*rp2)/(Agl*rp1 + Bgl*rp2) # GL19a, B55
-        if r_o == np.infty:
+        if r_o == np.inf:
             x3ro = (Agl-Bgl)/(Agl+Bgl)
         else:
             ro1 = r_o - r1
@@ -438,8 +438,8 @@ def ray_trace_by_case(a, rm, rp, sb, lam, eta, r1, r2, r3, r4, up, um, inc, nmax
         pass
     return rvecs, phivecs, tvecs, Irmasks, signprs
 
-def ray_trace_all(mudists, MoDuas, varphi, inc, a, nmax, adap_fac = 1, axisymmetric=True, stationary=True, nmin=0, prev_Irmask = None, r_o=np.infty):
-    if r_o < np.infty:
+def ray_trace_all(mudists, MoDuas, varphi, inc, a, nmax, adap_fac = 1, axisymmetric=True, stationary=True, nmin=0, prev_Irmask = None, r_o=np.inf):
+    if r_o < np.inf:
         r_o = np.float64(r_o)
     if np.isclose(a,0):
         a = 1e-6
@@ -798,7 +798,7 @@ def emissivity_model_sep_lp(rvecs, phivecs, signprs, signpthetas, alphas, betas,
 
 
 
-def kerr_exact_sep_lp(mudists, MoDuas, varphi, inc, a, nmax, boost, chi, fluid_eta, iota, spec, alpha_zeta, adap_fac = 1, compute_V=False, axisymmetric=True, stationary=True, r_o=np.infty):
+def kerr_exact_sep_lp(mudists, MoDuas, varphi, inc, a, nmax, boost, chi, fluid_eta, iota, spec, alpha_zeta, adap_fac = 1, compute_V=False, axisymmetric=True, stationary=True, r_o=np.inf):
     """
     Numerical: get rs from rho, varphi, inc, a, and subimage index n.
     """

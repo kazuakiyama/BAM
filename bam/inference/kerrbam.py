@@ -36,7 +36,7 @@ class KerrBam:
     if Bam is in modeling mode, jfunc should use pm functions
     '''
     #class contains knowledge of a grid in Boyer-Lindquist coordinates, priors on each pixel, and the machinery to fit them
-    def __init__(self, fov, npix, jfunc, jarg_names, jargs, MoDuas, a, inc, zbl,  xuas = 0., yuas = 0., PA=0.,  nmax=0, beta=0., chi=0., eta = None, iota=np.pi/2, spec=1., alpha_zeta = None, h = 1, polfrac=0.7, dEVPA=0, f=0., e=0., var_a = 0, var_b = 0, var_c = 0, var_u0=4e9, polflux=True, source='', periodic=False, adap_fac =1, axisymmetric = True, stationary = True, optical_depth='thin',compute_P=True,compute_V=False,interp_order=1, use_jax=False, rice_amps=False, times=np.array([0]), r_o=np.infty):
+    def __init__(self, fov, npix, jfunc, jarg_names, jargs, MoDuas, a, inc, zbl,  xuas = 0., yuas = 0., PA=0.,  nmax=0, beta=0., chi=0., eta = None, iota=np.pi/2, spec=1., alpha_zeta = None, h = 1, polfrac=0.7, dEVPA=0, f=0., e=0., var_a = 0, var_b = 0, var_c = 0, var_u0=4e9, polflux=True, source='', periodic=False, adap_fac =1, axisymmetric = True, stationary = True, optical_depth='thin',compute_P=True,compute_V=False,interp_order=1, use_jax=False, rice_amps=False, times=np.array([0]), r_o=np.inf):
         if use_jax:
             print("Using jax is not recommended for an adaptive model.")
             self.rtfunc = bam.inference.jax_kerrexact.kerr_exact_sep_lp
@@ -134,7 +134,7 @@ class KerrBam:
             if self.axisymmetric:
                 print("Non-stationary flow requires non-axisymmetry for now.")
                 self.axisymmetric = False
-            if r_o == np.infty:
+            if r_o == np.inf:
                 print("Cannot use infinite camera distance with non-stationary model! Defaulting to 1e4 M.")
                 self.r_o = 1.e4
         if self.periodic:
