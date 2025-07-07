@@ -27,7 +27,7 @@ minkmetric = np.diag([-1, 1, 1, 1])
 kernel = np.ones((3,3))
 
 phi_o = 3*np.pi/2
-r_o = np.infty
+r_o = np.inf
 
 def R1_R2(al,phi,j,ret_r2=True): #B62 and B65
     """
@@ -176,7 +176,7 @@ def ray_trace_by_case(a, rm, rp, sb, lam, eta, r1, r2, r3, r4, up, um, inc, nmax
     # sb = np.sign(beta)
     if case == 1:
         r3142sqrt = np.sqrt(r31*r42)
-        if r_o == np.infty:
+        if r_o == np.inf:
             x2ro = np.sqrt(r31/r41)
         else:
             x2ro = np.sqrt(r31*(r_o-r4)/(r41*(r_o-r3)))
@@ -190,7 +190,7 @@ def ray_trace_by_case(a, rm, rp, sb, lam, eta, r1, r2, r3, r4, up, um, inc, nmax
         # Ir_total = 2*Ir_turn
     if case == 2:
         r3142sqrt = np.sqrt(r31*r42)
-        if r_o == np.infty:
+        if r_o == np.inf:
             x2ro = np.sqrt(r31/r41)
         else:
             x2ro = np.sqrt(r31*(r_o-r4)/(r41*(r_o-r3)))
@@ -288,7 +288,7 @@ def ray_trace_by_case(a, rm, rp, sb, lam, eta, r1, r2, r3, r4, up, um, inc, nmax
         rp1 = rp-r1
         rp2 = rp-r2
         x3rp = (Agl*rp1 - Bgl*rp2)/(Agl*rp1 + Bgl*rp2) # GL19a, B55
-        if r_o == np.infty:
+        if r_o == np.inf:
             x3ro = (Agl-Bgl)/(Agl+Bgl)
         else:
             ro1 = r_o - r1
